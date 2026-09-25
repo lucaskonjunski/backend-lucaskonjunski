@@ -22,7 +22,9 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 nome TEXT NOT NULL,
 duracao INTEGER NOT NULL
 )
-`);-------------------------------------------
+`);
+
+// ------------------------------------------------------------
 // Validacao
 // ------------------------------------------------------------
 function validarTreino(corpo) {
@@ -40,14 +42,40 @@ function validarTreino(corpo) {
 // GET /treinos - lista todos os treinos
 // ------------------------------------------------------------
 app.get('/treinos', (req, res) => {
+// --- Acrescentado para o Item 10 ---
+const busca = req.query.busca;
+if (busca) {
+const termoBusca = `%${busca}%`;
+const treinosFiltrados = db.prepare('SELECT * FROM treinos WHERE nome LIKE ?').all(termoBusca);
+return res.status(200).json(treinosFiltrados);
+}
+// -----------------------------------
+
 const treinos = db.prepare('SELECT * FROM treinos').all();
 res.status(200).json(treinos);
+});
+
+// ------------------------------------------------------------
+// GET /treinos/resumo - resumo estatistico (Acrescentado para Item 11)
+// ------------------------------------------------------------
+app.get('/treinos/resumo', (req, res) => {
+const consulta = db.prepare('SELECT COUNT(*) AS total, SUM(duracao) AS minutos, AVG(duracao) AS media FROM treinos').get();
+res.status(200).json({
+total: consulta.total || 0,
+minutos: consulta.minutos || 0,
+media: consulta.media || 0
+});
 });
 
 // ------------------------------------------------------------
 // GET /treinos/:id - busca um treino pelo id
 // ------------------------------------------------------------
 app.get('/treinos/:id', (req, res) => {
+if (!/^\d+\$/.test(req.params.id)) {
+return res.status(400).json({ erro: 'Id invalido. O ID deve ser um numero inteiro.' });
+}
+// -----------------------------------
+
 const id = Number(req.params.id);
 const treino = db.prepare('SELECT * FROM treinos WHERE id = ?').get(id);
 if (treino === undefined) {
@@ -64,11 +92,9 @@ const erro = validarTreino(req.body);
 if (erro !== null){
 return res.status(400).json({ erro: erro });
 }
-// Insere no banco
 const resultado = db
 .prepare('INSERT INTO treinos (nome, duracao) VALUES (?, ?)')
 .run(req.body.nome, req.body.duracao);
-// Busca o treino recem-criado para devolver com o id gerado
 const novo = db
 .prepare('SELECT * FROM treinos WHERE id = ?')
 .get(resultado.lastInsertRowid);
