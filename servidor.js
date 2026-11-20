@@ -1,19 +1,25 @@
 const express = require('express');
-const treinosController = require('./controllers/treinosController.js');
+const controller = require('./controllers/treinosController.js');
 const authController = require('./controllers/authController.js');
+
 const app = express();
+
 app.use(express.json());
-// treinos (Aula 04)
-app.get('/treinos', treinosController.listar);
-app.get('/treinos/:id', treinosController.buscarUm);
-app.post('/treinos', treinosController.criar);
-app.put('/treinos/:id', treinosController.atualizar);
-app.delete('/treinos/:id', treinosController.remover);
-// autenticacao (Aula 05)
+
+// Rotas de treinos
+app.get('/treinos', controller.listar);
+app.get('/treinos/:id', controller.buscarUm);
+app.post('/treinos', controller.criar);
+app.put('/treinos/:id', controller.atualizar);
+app.delete('/treinos/:id', controller.remover);
+
+// Rotas de autenticação
 app.post('/login', authController.login);
 app.get('/perfil', authController.perfil);
 app.post('/logout', authController.logout);
+
 const PORTA = 3000;
+
 app.listen(PORTA, () => {
-console.log(`Servidor rodando em http://localhost:${PORTA}`);
+    console.log(`Servidor rodando em http://localhost:${PORTA}`);
 });

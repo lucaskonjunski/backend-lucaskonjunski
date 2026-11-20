@@ -90,3 +90,44 @@ DELETE {{url}}/treinos/99999
 
 ### 12 - Listar de novo pra conferir       -> espera 200
 GET {{url}}/treinos
+
+### 13 - Login correto -> espera 200
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "usuario": "diego",
+    "senha": "1234"
+}
+
+
+### 14 - Consultar perfil logado -> espera 200
+GET {{url}}/perfil
+
+
+### 15 - Login com senha errada -> espera 401
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "usuario": "diego",
+    "senha": "senhaerrada"
+}
+
+
+### 16 - Login com usuario inexistente -> espera 401
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "usuario": "naoexiste",
+    "senha": "1234"
+}
+
+
+### 17 - Logout -> espera 204
+POST {{url}}/logout
+
+
+### 18 - Perfil depois do logout -> espera 401
+GET {{url}}/perfil

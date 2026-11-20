@@ -7,6 +7,10 @@
     "start": "node servidor.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^4.19.2"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
   }
 }
