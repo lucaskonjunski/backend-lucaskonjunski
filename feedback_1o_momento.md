@@ -1,5 +1,15 @@
-Lucas, seu repositório fechou em 1,5 de 2,5. Na aula 2, a API passou nos 10 testes no commit ef998a6, de 16/09. Na aula 3, o melhor resultado foi 6 de 7 testes e 0 de 3 exercícios, mas isso vem do commit ef998a6, que ainda é a API em memória. Depois que você migrou para SQLite, no commit cec35c3 ("terminei a aula 03", de 25/09), passaram só 3 de 7 testes: faltaram o GET /:id com 404, o DELETE, o PUT alterando só o treino alvo (WHERE id) e os dados persistirem depois de reiniciar. Os exercícios do total, do filtro ?minimo= e da ordenação não foram feitos.
+Lucas, sua nota do repositório ficou em 2,8 de 3,0.
 
-Na aula 4, nos commits 412b0c4 e 0b1a9e5 (30/10), você criou as pastas `Controller/` e `Service/` com os arquivos, mas o servidor.js importa `./controllers/treinosController.js`. Como a pasta se chama `Controller` (singular e com C maiúsculo), o servidor nem inicia e as rotas não respondem. Os nomes das pastas precisam ser exatamente `controllers/` e `services/`. Só 2 de 8 testes passaram (banco.js existe e servidor.js sem SQL), faltaram o teste-banco2.js e o teste-service.js, que não existem no repositório, e a regra dos 180 minutos não foi encontrada. Na aula 5, no commit 044814c ("aula05acabada", de 30/10), você criou authController, authService, usuariosRepository e sessoes.js, mas o servidor não inicia pelo mesmo erro de importação, então nenhum dos 8 testes passou. A entrega contou, mas sem pontuar nos testes. A aula 6 não foi entregue: não há bcrypt no package.json, nem criarUsuarios.js, e a senha continua em texto puro.
+Olhei todos os seus commits até 20/11 às 23h59 e fiquei com o melhor resultado de cada aula, então o que você reentregou já entrou na conta. Cada aula vale um quinto da nota, metade pela entrega e metade pelos testes que passaram.
 
-Se tiver dúvida, fala na próxima aula.
+Na aula 2 sua API passou nos 10 testes, no commit ef998a6 de 16/09.
+
+Na aula 3 passaram 6 de 7 testes do SQLite, no commit ef998a6 de 16/09. Os testes mostram que os dados não ficam salvos quando o servidor reinicia. Nenhum dos 3 exercícios (total, filtro mínimo e ordenação) funcionou. Dos opcionais (busca, resumo e id inválido) funcionaram 2, e isso rendeu bônus.
+
+Na aula 4 passaram 4 de 8 testes, no commit cd6ba78 de 20/11. Os testes mostram que o teste-banco2.js não existe ou dá erro, o teste-service.js não existe ou dá erro, o CRUD não responde mais como na aula 3 e os dados não ficam salvos quando o servidor reinicia. A regra dos 180 minutos está no treinosService.js.
+
+Na aula 5 passaram 7 de 8 testes, no commit cd6ba78 de 20/11. Os testes mostram que as rotas de treino não pedem login.
+
+Na aula 6 passaram 9 de 10 testes, no commit cd6ba78 de 20/11. Os testes mostram que as rotas de treino deixaram de funcionar. O testes.http com login, perfil e logout está lá.
+
+As notas estão fechadas. Se tiver dúvida, fala na próxima aula.
